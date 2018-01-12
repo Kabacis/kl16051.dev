@@ -31,7 +31,7 @@
         @include ('blog.sidebar')
     </div>
 </div>
-@include ('blog.footer')
+@include ('bananas.footer')
 
 </body>
 </html>

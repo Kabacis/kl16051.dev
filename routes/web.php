@@ -4,6 +4,7 @@
 Route::get('/', 'BananaController@index');
 Route::get('/SP', 'BananaController@showSP');
 Route::get('/SP/{banana}', 'BananaController@show');
+Route::post('/SP/{banana}/resursi', 'ResursiController@store');
 
 
 
