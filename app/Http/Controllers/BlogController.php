@@ -3,13 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Blog;
 
 
 class BlogController extends Controller
 {
+
     public function index(){
 
-        return view('blog.index');
+        $blogs = Blog::latest()->get();
+
+        return view('blog.index', compact('blogs'));
     }
 
     public function create(){
@@ -18,16 +22,23 @@ class BlogController extends Controller
 
 
     public function store(){
-        // Create a new post using the requested data
-        // Save it to the database
 
-        \App\Blog::create([
-            'title' => request('title'),
-            'body' => request('body')
+        $this->validate(request(),[
+                'title' => 'required',
+                'body'  => 'required'
+            ]);
 
-        ]);
+        Blog::create(request(['title' , 'body']));
 
-        // And then redirect to the home page
         return redirect('/blog');
     }
+
+    public function show(Blog $blog){
+
+            return view('blog.show', compact('blog'));
+    }
+
 }
+
+
+
